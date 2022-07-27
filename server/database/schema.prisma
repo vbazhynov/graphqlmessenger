@@ -8,18 +8,21 @@ generator client {
   output   = "../src/generated/prisma-client-js"
 }
 
+model Response {
+  id      Int   @id @default (autoincrement())
+  content String
+  postId  Int
+}
+
 model Message {
   id        Int     @id @default(autoincrement())
   name      String
   content   String
   likes     Int   @default(0)
   dislike   Int   @default(0)
+  createdAt DateTime @default(now())
   responses   Response[]
 }
 
-model Response {
-  id      Int   @id @default (autoincrement())
-  content String
-  postId  Int
-}
+
 
