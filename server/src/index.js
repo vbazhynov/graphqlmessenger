@@ -1,12 +1,18 @@
-const { createServer } = require("@graphql-yoga/node");
+const { createServer, createPubSub } = require("@graphql-yoga/node");
 const { readFileSync } = require("fs");
 const Query = require("./resolvers/query");
-console.log(Query);
+const Mutation = require("./resolvers/Mutation");
+const { PrismaClient } = require("./generated/prisma-client-js");
+
 const typeDefs = readFileSync(require.resolve("./schema.graphql")).toString(
   "utf-8"
 );
+const prisma = new PrismaClient();
+const pubSub = createPubSub();
+
 const resolvers = {
   Query,
+  Mutation,
 };
 
 const server = createServer({
@@ -14,6 +20,7 @@ const server = createServer({
     typeDefs,
     resolvers,
   },
+  context: { prisma, pubSub },
 });
 
 server.start(() => console.log('Server running on "localhost:4000"'));

@@ -1,10 +1,32 @@
 type Query {
   version: String!
-  products: [Product!]!
+  messages: [Message!]!
 }
 
-type Product {
+input MessageInput {
+  name: String!
+  content: String!
+}
+
+type Mutation {
+  createMessage(data: MessageInput!): Message!
+}
+
+type Subscription {
+  newMessage: Message
+}
+
+type Message {
   id: ID!
-  title: String!
-  price: Float!
+  name: String!
+  content: String!
+  likes: Int
+  dislike: Int
+  createdAt: String
+  responses: [Response]
+}
+
+type Response {
+  id: Int!
+  content: String!
 }

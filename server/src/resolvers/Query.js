@@ -1,20 +1,9 @@
 const version = () => "1.1.0";
 
-const products = (_parent, _args, _context, _info) => {
-  const products = [
-    {
-      id: "1",
-      title: "Banana",
-      price: 23.5,
-    },
-    {
-      id: "2",
-      title: "Apple",
-      price: 3.25,
-    },
-  ];
+const messages = async (_parent, _args, context, _info) => {
+  const messages = await context.prisma.message.findMany();
 
-  return products;
+  return messages;
 };
 
-module.exports = { products, version };
+module.exports = { messages, version };

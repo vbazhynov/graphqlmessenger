@@ -7,5 +7,15 @@
   },
   "devDependencies": {
     "prisma": "^4.1.0"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "start-dev": "nodemon src/index.js",
+    "debug": "node --inspect src/index.js",
+    "lint:fix": "npx eslint --fix --ext .js .",
+    "prisma": "prisma db push && prisma migrate"
+  },
+  "prisma": {
+    "schema": "database/schema.prisma"
   }
 }
