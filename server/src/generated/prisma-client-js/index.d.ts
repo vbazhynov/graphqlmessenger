@@ -2035,12 +2035,12 @@ export namespace Prisma {
   export type ResponseSelect = {
     id?: boolean
     content?: boolean
-    Message?: boolean | MessageArgs
+    message?: boolean | MessageArgs
     messageId?: boolean
   }
 
   export type ResponseInclude = {
-    Message?: boolean | MessageArgs
+    message?: boolean | MessageArgs
   }
 
   export type ResponseGetPayload<
@@ -2054,12 +2054,12 @@ export namespace Prisma {
     ?'include' extends U
     ? Response  & {
     [P in TrueKeys<S['include']>]:
-        P extends 'Message' ? MessageGetPayload<S['include'][P]> | null :  never
+        P extends 'message' ? MessageGetPayload<S['include'][P]> | null :  never
   } 
     : 'select' extends U
     ? {
     [P in TrueKeys<S['select']>]:
-        P extends 'Message' ? MessageGetPayload<S['select'][P]> | null :  P extends keyof Response ? Response[P] : never
+        P extends 'message' ? MessageGetPayload<S['select'][P]> | null :  P extends keyof Response ? Response[P] : never
   } 
     : Response
   : Response
@@ -2433,7 +2433,7 @@ export namespace Prisma {
     constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
     readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
-    Message<T extends MessageArgs = {}>(args?: Subset<T, MessageArgs>): CheckSelect<T, Prisma__MessageClient<Message | null >, Prisma__MessageClient<MessageGetPayload<T> | null >>;
+    message<T extends MessageArgs = {}>(args?: Subset<T, MessageArgs>): CheckSelect<T, Prisma__MessageClient<Message | null >, Prisma__MessageClient<MessageGetPayload<T> | null >>;
 
     private get _document();
     /**
@@ -2890,14 +2890,14 @@ export namespace Prisma {
     NOT?: Enumerable<ResponseWhereInput>
     id?: IntFilter | number
     content?: StringFilter | string
-    Message?: XOR<MessageRelationFilter, MessageWhereInput> | null
+    message?: XOR<MessageRelationFilter, MessageWhereInput> | null
     messageId?: IntNullableFilter | number | null
   }
 
   export type ResponseOrderByWithRelationInput = {
     id?: SortOrder
     content?: SortOrder
-    Message?: MessageOrderByWithRelationInput
+    message?: MessageOrderByWithRelationInput
     messageId?: SortOrder
   }
 
@@ -2984,7 +2984,7 @@ export namespace Prisma {
 
   export type ResponseCreateInput = {
     content: string
-    Message?: MessageCreateNestedOneWithoutResponsesInput
+    message?: MessageCreateNestedOneWithoutResponsesInput
   }
 
   export type ResponseUncheckedCreateInput = {
@@ -2995,7 +2995,7 @@ export namespace Prisma {
 
   export type ResponseUpdateInput = {
     content?: StringFieldUpdateOperationsInput | string
-    Message?: MessageUpdateOneWithoutResponsesNestedInput
+    message?: MessageUpdateOneWithoutResponsesNestedInput
   }
 
   export type ResponseUncheckedUpdateInput = {

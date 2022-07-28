@@ -1,3 +1,13 @@
+const isMessageExists = async (context, id) =>
+  await context.prisma.message
+    .findFirst({
+      where: {
+        id: id,
+      },
+      select: { id: true },
+    })
+    .then(Boolean);
+
 const createMessage = async (_parent, args, context) => {
   const createdMessage = await context.prisma.message.create({
     data: args.data,
@@ -7,33 +17,85 @@ const createMessage = async (_parent, args, context) => {
 };
 
 const createResponse = async (_parent, args, context) => {
-  const { content, messageId } = args;
-
-  const isMessageExists = await context.prisma.message
-    .findFirst({
-      where: {
-        id: messageId,
-      },
-      select: { id: true },
-    })
-    .then(Boolean);
-
-  if (!isMessageExists) {
-    throw new Error(`Product with id ${messageId} does not exist`);
+  const {
+    data: { content, messageId },
+  } = args;
+  if (!(await isMessageExists(context, id))) {
+    console.error(`Message with id ${messageId} does not exist`);
+    throw new Error(`Message with id ${messageId} does not exist`);
   }
-
-  const answer = await context.prisma.response.create({
+  return await context.prisma.response.create({
     data: {
       content,
-      Message: {
+      message: {
         connect: { id: messageId },
       },
     },
   });
-
-  console.log(answer);
-
-  return answer;
 };
 
-module.exports = { createMessage, createResponse };
+const incrementLike = async (_parent, args, context) => {
+  const { id } = args;
+  if (!(await isMessageExists(context, id))) {
+    console.error(`Message with id ${messageId} does not exist`);
+    throw new Error(`Message with id ${messageId} does not exist`);
+  }
+  return await context.prisma.message.update({
+    where: { id: id },
+    data: {
+      likes: { increment: 1 },
+    },
+  });
+};
+
+const decrementLike = async (_parent, args, context) => {
+  const { id } = args;
+  if (!(await isMessageExists(context, id))) {
+    console.error(`Message with id ${messageId} does not exist`);
+    throw new Error(`Message with id ${messageId} does not exist`);
+  }
+  return await context.prisma.message.update({
+    where: { id: id },
+    data: {
+      likes: { decrement: 1 },
+    },
+  });
+};
+
+const incrementDislike = async (_parent, args, context) => {
+  const { id } = args;
+  if (!(await isMessageExists(context, id))) {
+    console.error(`Message with id ${messageId} does not exist`);
+    throw new Error(`Message with id ${messageId} does not exist`);
+  }
+  return await context.prisma.message.update({
+    where: { id: id },
+    data: {
+      dislike: { increment: 1 },
+    },
+  });
+};
+
+const decrementDislike = async (_parent, args, context) => {
+  const { id } = args;
+  console.log(args);
+  if (!(await isMessageExists(context, id))) {
+    console.error(`Message with id ${messageId} does not exist`);
+    throw new Error(`Message with id ${messageId} does not exist`);
+  }
+  return await context.prisma.message.update({
+    where: { id: id },
+    data: {
+      dislike: { decrement: 1 },
+    },
+  });
+};
+
+module.exports = {
+  createMessage,
+  createResponse,
+  incrementLike,
+  decrementLike,
+  incrementDislike,
+  decrementDislike,
+};
