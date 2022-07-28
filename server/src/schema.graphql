@@ -4,21 +4,25 @@ type Query {
 }
 
 input MessageInput {
-  name: String!
   content: String!
+}
+
+input ResponseInput {
+  content: String!
+  messageId: Int!
 }
 
 type Mutation {
   createMessage(data: MessageInput!): Message!
+  createResponse(data: ResponseInput!): Response!
 }
 
 type Subscription {
-  newMessage: Message
+  newMessage: Message!
 }
 
 type Message {
   id: ID!
-  name: String!
   content: String!
   likes: Int
   dislike: Int
@@ -29,4 +33,5 @@ type Message {
 type Response {
   id: Int!
   content: String!
+  message: Message
 }

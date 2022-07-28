@@ -1,26 +1,79 @@
 const { createServer, createPubSub } = require("@graphql-yoga/node");
+const { WebSocketServer } = require("ws");
+const { useServer } = require("graphql-ws/lib/use/ws");
 const { readFileSync } = require("fs");
-const Query = require("./resolvers/query");
+const Query = require("./resolvers/Query");
 const Mutation = require("./resolvers/Mutation");
+const Subscription = require("./resolvers/Subscription");
+const Response = require("./resolvers/Response");
+// const Product = require("./resolvers/Product");
 const { PrismaClient } = require("./generated/prisma-client-js");
 
-const typeDefs = readFileSync(require.resolve("./schema.graphql")).toString(
-  "utf-8"
-);
-const prisma = new PrismaClient();
-const pubSub = createPubSub();
+async function main() {
+  const pubsub = createPubSub();
 
-const resolvers = {
-  Query,
-  Mutation,
-};
+  const resolvers = {
+    Query,
+    Mutation,
+    Subscription,
+    Response,
+    // Product,
+  };
 
-const server = createServer({
-  schema: {
-    typeDefs,
-    resolvers,
-  },
-  context: { prisma, pubSub },
+  const typeDefs = readFileSync(require.resolve("./schema.graphql")).toString(
+    "utf-8"
+  );
+  const prisma = new PrismaClient();
+
+  const yogaApp = createServer({
+    schema: {
+      typeDefs,
+      resolvers,
+    },
+    context: { prisma, pubsub },
+    graphiql: {
+      subscriptionsProtocol: "WS",
+    },
+  });
+
+  // Get NodeJS Server from Yoga
+  const httpServer = await yogaApp.start();
+  // Create WebSocket server instance from our Node server
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: yogaApp.getAddressInfo().endpoint,
+  });
+
+  useServer(
+    {
+      execute: (args) => args.rootValue.execute(args),
+      subscribe: (args) => args.rootValue.subscribe(args),
+      onSubscribe: async (ctx, msg) => {
+        const { schema, execute, subscribe, contextFactory, parse, validate } =
+          yogaApp.getEnveloped(ctx);
+
+        const args = {
+          schema,
+          operationName: msg.payload.operationName,
+          document: parse(msg.payload.query),
+          variableValues: msg.payload.variables,
+          contextValue: await contextFactory(),
+          rootValue: {
+            execute,
+            subscribe,
+          },
+        };
+
+        const errors = validate(args.schema, args.document);
+        if (errors.length) return errors;
+        return args;
+      },
+    },
+    wsServer
+  );
+}
+
+main().catch((e) => {
+  console.error(e);
+  process.exit(1);
 });
-
-server.start(() => console.log('Server running on "localhost:4000"'));
