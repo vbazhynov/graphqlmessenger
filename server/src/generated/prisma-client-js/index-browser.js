@@ -89,7 +89,6 @@ function makeEnum(x) { return x; }
 
 exports.Prisma.MessageScalarFieldEnum = makeEnum({
   id: 'id',
-  name: 'name',
   content: 'content',
   likes: 'likes',
   dislike: 'dislike',

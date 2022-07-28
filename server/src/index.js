@@ -6,7 +6,7 @@ const Query = require("./resolvers/Query");
 const Mutation = require("./resolvers/Mutation");
 const Subscription = require("./resolvers/Subscription");
 const Response = require("./resolvers/Response");
-// const Product = require("./resolvers/Product");
+// const Message = require("./resolvers/Message");
 const { PrismaClient } = require("./generated/prisma-client-js");
 
 async function main() {
@@ -17,7 +17,7 @@ async function main() {
     Mutation,
     Subscription,
     Response,
-    // Product,
+    // Message,
   };
 
   const typeDefs = readFileSync(require.resolve("./schema.graphql")).toString(

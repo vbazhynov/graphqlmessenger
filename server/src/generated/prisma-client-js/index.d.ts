@@ -18,7 +18,6 @@ type UnwrapTuple<Tuple extends readonly unknown[]> = {
  */
 export type Message = {
   id: number
-  name: string
   content: string
   likes: number
   dislike: number
@@ -903,7 +902,6 @@ export namespace Prisma {
 
   export type MessageMinAggregateOutputType = {
     id: number | null
-    name: string | null
     content: string | null
     likes: number | null
     dislike: number | null
@@ -912,7 +910,6 @@ export namespace Prisma {
 
   export type MessageMaxAggregateOutputType = {
     id: number | null
-    name: string | null
     content: string | null
     likes: number | null
     dislike: number | null
@@ -921,7 +918,6 @@ export namespace Prisma {
 
   export type MessageCountAggregateOutputType = {
     id: number
-    name: number
     content: number
     likes: number
     dislike: number
@@ -944,7 +940,6 @@ export namespace Prisma {
 
   export type MessageMinAggregateInputType = {
     id?: true
-    name?: true
     content?: true
     likes?: true
     dislike?: true
@@ -953,7 +948,6 @@ export namespace Prisma {
 
   export type MessageMaxAggregateInputType = {
     id?: true
-    name?: true
     content?: true
     likes?: true
     dislike?: true
@@ -962,7 +956,6 @@ export namespace Prisma {
 
   export type MessageCountAggregateInputType = {
     id?: true
-    name?: true
     content?: true
     likes?: true
     dislike?: true
@@ -1064,7 +1057,6 @@ export namespace Prisma {
 
   export type MessageGroupByOutputType = {
     id: number
-    name: string
     content: string
     likes: number
     dislike: number
@@ -1092,7 +1084,6 @@ export namespace Prisma {
 
   export type MessageSelect = {
     id?: boolean
-    name?: boolean
     content?: boolean
     likes?: boolean
     dislike?: boolean
@@ -2805,7 +2796,6 @@ export namespace Prisma {
 
   export const MessageScalarFieldEnum: {
     id: 'id',
-    name: 'name',
     content: 'content',
     likes: 'likes',
     dislike: 'dislike',
@@ -2850,7 +2840,6 @@ export namespace Prisma {
     OR?: Enumerable<MessageWhereInput>
     NOT?: Enumerable<MessageWhereInput>
     id?: IntFilter | number
-    name?: StringFilter | string
     content?: StringFilter | string
     likes?: IntFilter | number
     dislike?: IntFilter | number
@@ -2860,7 +2849,6 @@ export namespace Prisma {
 
   export type MessageOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
     content?: SortOrder
     likes?: SortOrder
     dislike?: SortOrder
@@ -2874,7 +2862,6 @@ export namespace Prisma {
 
   export type MessageOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
     content?: SortOrder
     likes?: SortOrder
     dislike?: SortOrder
@@ -2891,7 +2878,6 @@ export namespace Prisma {
     OR?: Enumerable<MessageScalarWhereWithAggregatesInput>
     NOT?: Enumerable<MessageScalarWhereWithAggregatesInput>
     id?: IntWithAggregatesFilter | number
-    name?: StringWithAggregatesFilter | string
     content?: StringWithAggregatesFilter | string
     likes?: IntWithAggregatesFilter | number
     dislike?: IntWithAggregatesFilter | number
@@ -2940,7 +2926,6 @@ export namespace Prisma {
   }
 
   export type MessageCreateInput = {
-    name: string
     content: string
     likes?: number
     dislike?: number
@@ -2950,7 +2935,6 @@ export namespace Prisma {
 
   export type MessageUncheckedCreateInput = {
     id?: number
-    name: string
     content: string
     likes?: number
     dislike?: number
@@ -2959,7 +2943,6 @@ export namespace Prisma {
   }
 
   export type MessageUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     likes?: IntFieldUpdateOperationsInput | number
     dislike?: IntFieldUpdateOperationsInput | number
@@ -2969,7 +2952,6 @@ export namespace Prisma {
 
   export type MessageUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     likes?: IntFieldUpdateOperationsInput | number
     dislike?: IntFieldUpdateOperationsInput | number
@@ -2979,7 +2961,6 @@ export namespace Prisma {
 
   export type MessageCreateManyInput = {
     id?: number
-    name: string
     content: string
     likes?: number
     dislike?: number
@@ -2987,7 +2968,6 @@ export namespace Prisma {
   }
 
   export type MessageUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     likes?: IntFieldUpdateOperationsInput | number
     dislike?: IntFieldUpdateOperationsInput | number
@@ -2996,7 +2976,6 @@ export namespace Prisma {
 
   export type MessageUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     likes?: IntFieldUpdateOperationsInput | number
     dislike?: IntFieldUpdateOperationsInput | number
@@ -3090,7 +3069,6 @@ export namespace Prisma {
 
   export type MessageCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
     content?: SortOrder
     likes?: SortOrder
     dislike?: SortOrder
@@ -3105,7 +3083,6 @@ export namespace Prisma {
 
   export type MessageMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
     content?: SortOrder
     likes?: SortOrder
     dislike?: SortOrder
@@ -3114,7 +3091,6 @@ export namespace Prisma {
 
   export type MessageMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
     content?: SortOrder
     likes?: SortOrder
     dislike?: SortOrder
@@ -3494,7 +3470,6 @@ export namespace Prisma {
   }
 
   export type MessageCreateWithoutResponsesInput = {
-    name: string
     content: string
     likes?: number
     dislike?: number
@@ -3503,7 +3478,6 @@ export namespace Prisma {
 
   export type MessageUncheckedCreateWithoutResponsesInput = {
     id?: number
-    name: string
     content: string
     likes?: number
     dislike?: number
@@ -3521,7 +3495,6 @@ export namespace Prisma {
   }
 
   export type MessageUpdateWithoutResponsesInput = {
-    name?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     likes?: IntFieldUpdateOperationsInput | number
     dislike?: IntFieldUpdateOperationsInput | number
@@ -3530,7 +3503,6 @@ export namespace Prisma {
 
   export type MessageUncheckedUpdateWithoutResponsesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
     likes?: IntFieldUpdateOperationsInput | number
     dislike?: IntFieldUpdateOperationsInput | number

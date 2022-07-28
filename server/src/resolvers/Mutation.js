@@ -7,10 +7,8 @@ const createMessage = async (_parent, args, context) => {
 };
 
 const createResponse = async (_parent, args, context) => {
-  const {
-    response: { content, messageId },
-  } = args;
-  console.log("here");
+  const { content, messageId } = args;
+
   const isMessageExists = await context.prisma.message
     .findFirst({
       where: {
@@ -20,20 +18,22 @@ const createResponse = async (_parent, args, context) => {
     })
     .then(Boolean);
 
-  console.log(isMessageExists);
-
   if (!isMessageExists) {
     throw new Error(`Product with id ${messageId} does not exist`);
   }
 
-  return context.prisma.response.create({
+  const answer = await context.prisma.response.create({
     data: {
       content,
-      message: {
+      Message: {
         connect: { id: messageId },
       },
     },
   });
+
+  console.log(answer);
+
+  return answer;
 };
 
 module.exports = { createMessage, createResponse };

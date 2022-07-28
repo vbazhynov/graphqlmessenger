@@ -10,7 +10,6 @@ generator client {
 
 model Message {
   id        Int        @id @default(autoincrement())
-  name      String
   content   String
   likes     Int        @default(0)
   dislike   Int        @default(0)
@@ -21,6 +20,6 @@ model Message {
 model Response {
   id        Int      @id @default(autoincrement())
   content   String
-  Message   Message? @relation(fields: [messageId], references: [id])
+  message   Message? @relation(fields: [messageId], references: [id])
   messageId Int?
 }
