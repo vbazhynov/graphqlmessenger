@@ -20,6 +20,6 @@ model Message {
 model Response {
   id        Int      @id @default(autoincrement())
   content   String
-  Message   Message? @relation(fields: [messageId], references: [id])
+  message   Message? @relation(fields: [messageId], references: [id])
   messageId Int?
 }
