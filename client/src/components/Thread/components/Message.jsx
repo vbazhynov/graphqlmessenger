@@ -8,13 +8,14 @@ import {
 } from "../../../queries";
 import { Response } from "./Response";
 import { useState } from "react";
+import { orderBy } from "../../../constants";
 const Message = ({ content, likes, dislike, id, responses }) => {
   const handleLike = () => {
     likeMessage({ variables: { id: Number(id) } });
   };
 
   const [likeMessage] = useMutation(LIKE_MESSAGE, {
-    refetchQueries: [{ query: GET_MESSAGES }],
+    refetchQueries: [{ query: GET_MESSAGES, variables: { orderBy } }],
   });
 
   const handleDislike = () => {
@@ -22,7 +23,7 @@ const Message = ({ content, likes, dislike, id, responses }) => {
   };
 
   const [dislikeMessage] = useMutation(DISLIKE_MESSAGE, {
-    refetchQueries: [{ query: GET_MESSAGES }],
+    refetchQueries: [{ query: GET_MESSAGES, variables: { orderBy } }],
   });
   const [response, setResponse] = useState("");
 
@@ -30,8 +31,6 @@ const Message = ({ content, likes, dislike, id, responses }) => {
     setResponse(e.target.value);
   };
   const sendResponseHandler = () => {
-    console.log(response);
-    console.log(id);
     createResponse({
       variables: { data: { content: response, messageId: Number(id) } },
     });

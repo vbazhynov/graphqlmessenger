@@ -56,8 +56,14 @@ export const NEW_MESSAGE = gql`
   subscription newMessage {
     newMessage {
       id
-      price
-      title
+      content
+      likes
+      dislike
+      createdAt
+      responses {
+        id
+        content
+      }
     }
   }
 `;

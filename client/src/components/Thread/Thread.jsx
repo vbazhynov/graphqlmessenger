@@ -16,19 +16,20 @@ const Thread = () => {
         if (!subscriptionData.data) {
           return prev;
         }
-
+        console.log(prev);
         const { newMessage } = subscriptionData.data;
-        console.log(subscriptionData.data);
-        return {
+        const mes = {
           ...prev,
-          messagess: {
+          messages: {
             ...prev.messages,
-            productList: [
+            messageList: [
               { ...newMessage, responses: [] },
               ...prev.messages.messageList,
             ],
           },
         };
+        console.log(mes);
+        return mes;
       },
     });
   }, [subscribeToMore]);
