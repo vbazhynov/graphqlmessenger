@@ -1,26 +1,22 @@
 import { React, useState } from "react";
 import { useMutation } from "@apollo/client";
 import "./styles.css";
-import { GET_MESSAGES, CREATE_MESSAGE } from "../../queries";
+import { CREATE_MESSAGE, GET_MESSAGES } from "../../queries";
 import { orderBy } from "../../constants";
+// import { orderBy } from "../../constants";
 const AddMessage = () => {
-  const [messageText, setMessageText] = useState("");
+  const [content, setMessageText] = useState("");
 
   const changeHandler = (e) => {
     setMessageText(e.target.value);
   };
 
-  const [sendMessage, { loading, error }] = useMutation(CREATE_MESSAGE, {
+  const [createMessage, { loading, error }] = useMutation(CREATE_MESSAGE, {
     refetchQueries: [{ query: GET_MESSAGES, variables: { orderBy } }],
   });
 
   const handleSendMessage = () => {
-    console.log(messageText);
-    sendMessage({
-      variables: {
-        content: { messageText },
-      },
-    });
+    createMessage({ variables: { data: { content } } });
   };
   let status = "";
   if (loading) status = "Submitting...";
@@ -34,13 +30,13 @@ const AddMessage = () => {
           className="text-input"
           type="text"
           placeholder="Enter Your Message Here..."
-          value={messageText}
+          value={content}
           onChange={changeHandler}
         ></textarea>
         <button
           type="button"
           className="send-message-btn"
-          value={messageText}
+          value={content}
           onClick={handleSendMessage}
         >
           Send

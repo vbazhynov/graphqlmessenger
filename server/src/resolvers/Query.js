@@ -8,7 +8,6 @@ const messages = async (_parent, args, context, _info) => {
         content: filter,
       }
     : {};
-  console.log(where);
   const messageList = await context.prisma.message.findMany({
     where,
     skip,
