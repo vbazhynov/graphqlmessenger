@@ -1,5 +1,6 @@
-const Response = () => {
-  return <div className="responses-container">Responce</div>;
+const Response = ({ response }) => {
+  console.log(response);
+  return <div className="response">{response}</div>;
 };
 
 export { Response };

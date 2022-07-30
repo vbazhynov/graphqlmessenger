@@ -44,10 +44,10 @@ export const DISLIKE_MESSAGE = gql`
 `;
 
 export const CREATE_RESPONSE = gql`
-  mutation createResponse($review: ResponseInput!) {
-    createResponse(review: $review) {
+  mutation createResponse($data: ResponseInput!) {
+    createResponse(data: $data) {
       id
-      text
+      content
     }
   }
 `;

@@ -6,6 +6,7 @@
 
 .message-wrapper {
   margin: 10px;
+  margin-left: 100px;
   min-height: 10px;
   width: 80%;
 }
@@ -19,6 +20,14 @@
   border-radius: 5px;
 }
 
+.message-response {
+  display: flex;
+  width: 100%;
+}
+
+.response-controls {
+  flex: 1 1 auto;
+}
 .message-controls {
   width: 80%;
 }
@@ -36,13 +45,18 @@
   cursor: pointer;
 }
 .responses-container {
-  background-color: rgb(252, 220, 178);
-  padding: 10px;
   width: 50%;
   margin-left: auto;
-  height: 20px;
-  border-radius: 5px;
 }
+
+.response {
+  background-color: rgb(252, 220, 178);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+  min-width: 150px;
+}
+
 .iconify {
   margin-left: 15px;
 }

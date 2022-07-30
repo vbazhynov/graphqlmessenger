@@ -25,7 +25,7 @@ const Thread = () => {
             ...prev.messages,
             productList: [
               { ...newMessage, responses: [] },
-              ...prev.products.productList,
+              ...prev.messages.messageList,
             ],
           },
         };
@@ -38,7 +38,6 @@ const Thread = () => {
     return (
       <div className="messages-wrapper"> Error loading :{error.message}</div>
     );
-  console.log(data);
   return (
     <div className="messages-wrapper">
       {data.messages.messageList.map((message) => (
@@ -48,6 +47,7 @@ const Thread = () => {
           likes={message.likes}
           dislike={message.dislike}
           content={message.content}
+          responses={message.responses}
         />
       ))}
     </div>
