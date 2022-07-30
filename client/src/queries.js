@@ -27,6 +27,22 @@ export const CREATE_MESSAGE = gql`
   }
 `;
 
+export const LIKE_MESSAGE = gql`
+  mutation likeMessage($id: Int!) {
+    likeMessage(id: $id) {
+      likes
+    }
+  }
+`;
+
+export const DISLIKE_MESSAGE = gql`
+  mutation dislikeMessage($id: Int!) {
+    dislikeMessage(id: $id) {
+      dislike
+    }
+  }
+`;
+
 export const CREATE_RESPONSE = gql`
   mutation createResponse($review: ResponseInput!) {
     createResponse(review: $review) {

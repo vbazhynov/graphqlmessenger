@@ -36,10 +36,8 @@ input ResponseInput {
 type Mutation {
   createMessage(data: MessageInput!): Message!
   createResponse(data: ResponseInput!): Response!
-  incrementLike(id: Int!): Message
-  incrementDislike(id: Int!): Message
-  decrementLike(id: Int!): Message
-  decrementDislike(id: Int!): Message
+  likeMessage(id: Int!): Message
+  dislikeMessage(id: Int!): Message
 }
 
 type Subscription {

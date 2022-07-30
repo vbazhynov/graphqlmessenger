@@ -35,8 +35,9 @@ const createResponse = async (_parent, args, context) => {
   });
 };
 
-const incrementLike = async (_parent, args, context) => {
+const likeMessage = async (_parent, args, context) => {
   const { id } = args;
+  console.log(id);
   if (!(await isMessageExists(context, id))) {
     console.error(`Message with id ${messageId} does not exist`);
     throw new Error(`Message with id ${messageId} does not exist`);
@@ -49,21 +50,7 @@ const incrementLike = async (_parent, args, context) => {
   });
 };
 
-const decrementLike = async (_parent, args, context) => {
-  const { id } = args;
-  if (!(await isMessageExists(context, id))) {
-    console.error(`Message with id ${messageId} does not exist`);
-    throw new Error(`Message with id ${messageId} does not exist`);
-  }
-  return await context.prisma.message.update({
-    where: { id: id },
-    data: {
-      likes: { decrement: 1 },
-    },
-  });
-};
-
-const incrementDislike = async (_parent, args, context) => {
+const dislikeMessage = async (_parent, args, context) => {
   const { id } = args;
   if (!(await isMessageExists(context, id))) {
     console.error(`Message with id ${messageId} does not exist`);
@@ -77,26 +64,9 @@ const incrementDislike = async (_parent, args, context) => {
   });
 };
 
-const decrementDislike = async (_parent, args, context) => {
-  const { id } = args;
-  console.log(args);
-  if (!(await isMessageExists(context, id))) {
-    console.error(`Message with id ${messageId} does not exist`);
-    throw new Error(`Message with id ${messageId} does not exist`);
-  }
-  return await context.prisma.message.update({
-    where: { id: id },
-    data: {
-      dislike: { decrement: 1 },
-    },
-  });
-};
-
 module.exports = {
   createMessage,
   createResponse,
-  incrementLike,
-  decrementLike,
-  incrementDislike,
-  decrementDislike,
+  likeMessage,
+  dislikeMessage,
 };

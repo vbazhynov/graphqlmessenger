@@ -9,6 +9,7 @@
   min-height: 10px;
   width: 80%;
 }
+
 .message-container {
   padding: 15px;
   display: flex;
@@ -21,12 +22,19 @@
 .message-controls {
   width: 80%;
 }
-
+.iconify {
+  font-size: 1rem;
+}
 .likes-wrapper {
   width: 150px;
   margin-right: auto;
 }
-
+.likes-wrapper button {
+  border: none;
+  padding: 0 5px 0 0;
+  background-color: antiquewhite;
+  cursor: pointer;
+}
 .responses-container {
   background-color: rgb(252, 220, 178);
   padding: 10px;
