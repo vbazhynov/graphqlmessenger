@@ -9,6 +9,7 @@ const isMessageExists = async (context, id) =>
     .then(Boolean);
 
 const createMessage = async (_parent, args, context) => {
+  console.log(args.data);
   const createdMessage = await context.prisma.message.create({
     data: args.data,
   });

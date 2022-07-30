@@ -63,7 +63,6 @@ async function main() {
             subscribe,
           },
         };
-
         const errors = validate(args.schema, args.document);
         if (errors.length) return errors;
         return args;
@@ -72,7 +71,6 @@ async function main() {
     wsServer
   );
 }
-
 main().catch((e) => {
   console.error(e);
   process.exit(1);

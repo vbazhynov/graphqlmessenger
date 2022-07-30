@@ -1,0 +1,40 @@
+.messages-wrapper {
+  background-color: antiquewhite;
+  margin-top: 10px;
+  flex: 1 1 auto;
+}
+
+.message-wrapper {
+  margin: 10px;
+  min-height: 10px;
+  width: 80%;
+}
+.message-container {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: solid 3px white;
+  border-radius: 5px;
+}
+
+.message-controls {
+  width: 80%;
+}
+
+.likes-wrapper {
+  width: 150px;
+  margin-right: auto;
+}
+
+.responses-container {
+  background-color: rgb(252, 220, 178);
+  padding: 10px;
+  width: 50%;
+  margin-left: auto;
+  height: 20px;
+  border-radius: 5px;
+}
+.iconify {
+  margin-left: 15px;
+}

@@ -1,6 +1,27 @@
+enum Sort {
+  asc
+  desc
+}
+
+input MessagesOrderByInput {
+  content: Sort
+  id: Sort
+}
+
 type Query {
   version: String!
-  messages: [Message!]!
+  messages(
+    filter: String
+    skip: Int
+    take: Int
+    orderBy: MessagesOrderByInput
+  ): Messages
+  responses: [Response!]!
+}
+
+type Messages {
+  messageList: [Message!]!
+  count: Int!
 }
 
 input MessageInput {

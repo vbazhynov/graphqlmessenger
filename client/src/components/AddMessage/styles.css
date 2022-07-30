@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 100vh;
+}
+
+.text-input {
+  margin: 0 auto;
+  resize: none;
+  width: 200px;
+  height: 70px;
+}
+
+.send-message-btn {
+  /* width: 100px; */
+  margin-left: 10px;
+  height: 75px;
+  width: 70px;
+}
+
+.create-message-wrapper {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  padding: 10px;
+  background-color: antiquewhite;
+}
