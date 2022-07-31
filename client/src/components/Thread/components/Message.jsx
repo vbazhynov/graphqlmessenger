@@ -25,18 +25,24 @@ const Message = ({ content, likes, dislike, id, responses }) => {
   const [dislikeMessage] = useMutation(DISLIKE_MESSAGE, {
     refetchQueries: [{ query: GET_MESSAGES, variables: { orderBy } }],
   });
+
   const [response, setResponse] = useState("");
 
   const responseHandler = (e) => {
     setResponse(e.target.value);
   };
+
   const sendResponseHandler = () => {
+    if (!response) return;
     createResponse({
       variables: { data: { content: response, messageId: Number(id) } },
     });
+    setResponse("");
   };
 
-  const [createResponse] = useMutation(CREATE_RESPONSE);
+  const [createResponse] = useMutation(CREATE_RESPONSE, {
+    refetchQueries: [{ query: GET_MESSAGES, variables: { orderBy } }],
+  });
 
   return (
     <div className="message-container">

@@ -21,13 +21,12 @@ const createResponse = async (_parent, args, context) => {
   const {
     data: { content, messageId },
   } = args;
-  console.log(args);
   if (!(await isMessageExists(context, messageId))) {
     console.error(`Message with id ${messageId} does not exist`);
     throw new Error(`Message with id ${messageId} does not exist`);
   }
-  console.log(args);
-  return await context.prisma.response.create({
+
+  const response = await context.prisma.response.create({
     data: {
       content,
       message: {
@@ -35,6 +34,8 @@ const createResponse = async (_parent, args, context) => {
       },
     },
   });
+  context.pubsub.publish("NEW_MESSAGE", createdMessage);
+  return response;
 };
 
 const likeMessage = async (_parent, args, context) => {
@@ -43,6 +44,7 @@ const likeMessage = async (_parent, args, context) => {
     console.error(`Message with id ${messageId} does not exist`);
     throw new Error(`Message with id ${messageId} does not exist`);
   }
+
   return await context.prisma.message.update({
     where: { id: id },
     data: {
